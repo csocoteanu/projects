@@ -1,21 +1,54 @@
 Ext.onReady(function() {
+    Ext.create('Ext.form.Panel', {
+        renderTo: document.body,
+        title: 'Login to your account',
+        height: 860,
+        width: 640,
+        bodyPadding: 10,
+        defaultType: 'textfield',
+        items: [{
+                    xtype: 'textfield',
+                    name: 'email',
+                    fieldLabel: 'Email Address',
+                    vtype: 'email'  // requires value to be a valid email address format
+                },
+                {
+                    xtype: 'textfield',
+                    name: 'password',
+                    inputType: 'password',
+                    fieldLabel: 'Password',
+                },
+                {
+                    xtype: 'datefield',
+                    fieldLabel: 'Date of Birth',
+                    name: 'birthDate'
+                }
+        ]
+    });
 
-    var email = Ext.get('tbEmail');
-    var password = Ext.get('tbPassword');
-    var login = Ext.get('btnLogin')
+/*
+    var txt_email = Ext.get('tbEmail');
+    var txt_password = Ext.get('tbPassword');
+    var bt_login = Ext.get('btnLogin')
 
-	Ext.select('btnLogin').on('click': function(e)
-	{
-		alert('email');
-	});
+    txt_email.on({
+        focus: function() { txt_email.style.color = "green"; },
+        blur: function() { txt_email.style.color = "black"; }
+    })
 
-    /*email.highlight();      // The element's background will highlight to yellow then fade back
-	email.addClass('red');  // Add a custom CSS class (defined in ExtStart.css)
-	email.center();         // Center the element in the viewport
-	email.setOpacity(.25);  // Make the element partially-transparent
-
-	password.highlight();      // The element's background will highlight to yellow then fade back
-	password.addClass('red');  // Add a custom CSS class (defined in ExtStart.css)
-	password.center();         // Center the element in the viewport
-	password.setOpacity(.25);  // Make the element partially-transparent*/
+    bt_login.on({
+        destroyable: true,  
+        // mouseover:   function() { console.log('mouseover'); },
+        // mouseout:    function() { console.log('mouseout'); },
+        click: function() {
+            var email = txt_email.dom.value
+            var password = txt_password.dom.value
+            onLoginClick(email, password);
+        }
+    });*/
+    
 });
+
+function onLoginClick(email, password) {
+    alert("Email = " + email + " Password = " + password)
+}
