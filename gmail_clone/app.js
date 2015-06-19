@@ -1,8 +1,9 @@
 Ext.onReady(function() {
-    Ext.create('Ext.form.Panel', {
+    var loginForm = Ext.create('Ext.form.Panel', {
+        url: '/',
         renderTo: document.body,
         title: 'Login to your account',
-        height: 860,
+        height: 140,
         width: 640,
         bodyPadding: 10,
         defaultType: 'textfield',
@@ -17,15 +18,12 @@ Ext.onReady(function() {
                     name: 'password',
                     inputType: 'password',
                     fieldLabel: 'Password',
-                },
-                {
-                    xtype: 'datefield',
-                    fieldLabel: 'Date of Birth',
-                    name: 'birthDate'
-                }
-        ]
+                }],
+         buttons: [{
+                    text: 'Login',
+                    handler: function(){ onLoginClick(loginForm); }
+                }]
     });
-
 /*
     var txt_email = Ext.get('tbEmail');
     var txt_password = Ext.get('tbPassword');
@@ -49,6 +47,11 @@ Ext.onReady(function() {
     
 });
 
-function onLoginClick(email, password) {
-    alert("Email = " + email + " Password = " + password)
+function onLoginClick(loginForm) {
+    if (loginForm.isValid()) {
+        debugger;
+        var email = loginForm.getForm().findField('email').getValue()
+        var password = loginForm.getForm().findField('password').getValue()
+        alert(email  + ": " + password)
+    }
 }
