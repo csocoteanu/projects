@@ -1,0 +1,33 @@
+<html>
+  <head>
+    <title>Create a new user</title>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js">  </script>
+    <script>
+      $(document).ready(function(){
+        $("#submit").click(function(){
+          var name=$("#name").val();
+          var email=$("#email").val();
+          var pwd=$("#password").val();
+
+          $.post("http://localhost:3000/api/create-user",
+                 {name: name, email: email, password: pwd},
+                 function(data) {
+                      alert(JSON.stringify(data));
+                 });
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <h1>Create New User</h1>
+    <label for="name">Name</label>
+    <input type="TEXT" id="name" size="40"><br>
+    <label for="name">Email</label>
+    <input type="TEXT" id="email" size="40"><br>
+    <label for="password">Password</label>
+    <input type="password" id="password" size="40"><br>
+
+
+    <input type="button" id="submit" value="Submit">
+  </body>
+</html>
