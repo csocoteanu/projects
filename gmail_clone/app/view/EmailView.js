@@ -6,24 +6,33 @@ Ext.define('GMAIL.view.EmailView', {
     
     store : 'Emails',
     
-    maxHeight: 350,
+    maxHeight:  Ext.getBody().getViewSize().height / 2,
     autoHeight : true,
 
     columns: [
         { 
             text      : 'Date',  
             dataIndex : 'date',
-            flex      : 1
+            width     : 120
         },
         { 
             text      : 'Sender', 
             dataIndex : 'sender', 
-            flex      : 2 
+            flex      : 1 
         },
         { 
             text      : 'Subject', 
             dataIndex : 'subject', 
             flex      : 1 
         }
-    ]
+    ],
+
+    bind : {
+        reference : 'GMAIL.model.Email',
+        title     : '{rec.subject}'
+    },
+    
+    viewModel: {
+        type: 'detailform'  // references DetailViewModel
+    },
 });

@@ -10,11 +10,8 @@ Ext.define('GMAIL.controller.Master', {
      },
     
     onGridSelect : function(grid, record, index, eOpts) {
-        debugger;
         var bodyform = Ext.ComponentQuery.query('gmail-EmailView')[0];
-        bodyform.up().items.add(
-            
-        )
-
+        bodyform.getViewModel().setData({rec: record})
+        bodyform.getViewModel().notify()
     }
 });
