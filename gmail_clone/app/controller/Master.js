@@ -2,8 +2,7 @@ Ext.define('GMAIL.controller.Master', {
     extend : 'Ext.app.Controller',
     
     init: function() {
-         this.control({
-             'gmail-EmailView': {
+         this.control({'#emailGrid': {
                  select : this.onGridSelect
              }
          });
