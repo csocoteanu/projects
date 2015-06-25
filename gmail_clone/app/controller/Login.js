@@ -4,15 +4,14 @@ Ext.define('GMAIL.controller.Login', {
     init : function() {        
 
         this.control({
-            'gmail-Login > button#LoginButton' : {
+            '#loginButton' : {
                 click : this.onLoginClick
             }
         });
     },
     
     onLoginClick : function(btn) {
-        //get reference to the form
-        var loginView = btn.up('gmail-Login');
+        var loginView = btn.up('gmail-LoginView');
 
         
 		if (loginView.isValid()) {
@@ -35,7 +34,7 @@ function isLoginSuccesfull(email, password) {
 }
 
 function onLoginSuccesfull() {
-    var form = Ext.ComponentQuery.query('gmail-AllEmailViews')[0];
+    var form = Ext.ComponentQuery.query('gmail-MainView')[0];
     var mainPage = form.up();
     mainPage.setActiveItem(form);
     form.setActiveTab(0);

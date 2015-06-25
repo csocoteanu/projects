@@ -7,7 +7,7 @@ Ext.define('GMAIL.view.EmailView', {
     },
     
     viewModel: {
-        type: 'detailform'  // references DetailViewModel
+        type: 'emailform'
     },
 
 

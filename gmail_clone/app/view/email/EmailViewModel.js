@@ -1,7 +1,7 @@
-Ext.define('MVVM.view.DetailViewModel', {
+Ext.define('GMAIL.view.EmailViewModel', {
     extend: 'Ext.app.ViewModel',
 
-    alias: 'viewmodel.detailform',
+    alias: 'viewmodel.emailform',
     
     data : {
         rec : null

@@ -21,7 +21,7 @@ Ext.define('GMAIL.controller.Master', {
      },
 
     onGridSelect : function(grid, record, index, eOpts) {
-        var bodyform =  this.getEmailViewFromGrid(grid);
+        var bodyform = grid.view.up('gmail-EmailView');
         bodyform.getViewModel().setData({rec: record});
         bodyform.getViewModel().notify();
     },
@@ -49,7 +49,7 @@ Ext.define('GMAIL.controller.Master', {
         if (newTab == tabPanel.items.get(3)) {
             Ext.MessageBox.confirm('Confirm', 'Are you sure you want to do that?', function(yesno) {
                 if (yesno == "yes") {
-                    var form = Ext.ComponentQuery.query('gmail-Login')[0];
+                    var form = Ext.ComponentQuery.query('gmail-LoginView')[0];
                     var mainPage = form.up();
                     mainPage.setActiveItem(form);
                 } else if (yesno == "no") {
@@ -60,44 +60,16 @@ Ext.define('GMAIL.controller.Master', {
     },
 
     onSendEmailClick : function(btn) {
-        var composeEmailView = btn.up('gmail-ComposeEmailView');
-        var emailModel = composeEmailView.getViewModel();
-        var data = emailModel.getData();
+        var composeEmailView = btn.up('gmail-ComposeNewEmailView');
+        var emailModel = null;
+        var data = null; 
+
+        emailModel = composeEmailView.getViewModel();
+        datat = emailModel.getData();
 
         console.log(data.rec);
 
         emailModel.setData({rec: null});
         emailModel.notify();
-    },
-
-    getEmailViewFromGrid : function(grid) {
-        var emailView      = null;
-        var startElement   = grid.view;
-
-        while (startElement) {
-            var id = startElement.id;
-
-            if (this.idIsFromEmailView(id)) {
-                break;
-            }
-
-            startElement = startElement.up();
-        }
-
-        emailView = startElement;
-        return emailView;
-    },
-
-    idIsFromEmailView : function(id) {
-        var emailViewIdasString     = null;
-        var kEmailViewStringPattern = 'gmail-EmailView-';
-        var kEmailViewStringLength  = kEmailViewStringPattern.length;
-
-        var index = id.indexOf(kEmailViewStringPattern);
-        if (index != -1) {
-            emailViewIdasString = id.substring(index + kEmailViewStringLength);
-        }
-
-        return emailViewIdasString != null && !isNaN(emailViewIdasString);
     }
 });

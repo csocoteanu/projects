@@ -1,6 +1,6 @@
-Ext.define('GMAIL.view.AllEmailViews', {
+Ext.define('GMAIL.view.MainView', {
     extend            : 'Ext.tab.Panel',
-    xtype             : 'gmail-AllEmailViews',
+    xtype             : 'gmail-MainView',
     itemId            : 'allTabs',
 
     activeTab         : 0,
@@ -18,7 +18,7 @@ Ext.define('GMAIL.view.AllEmailViews', {
         },
         {
             title : 'Compose new email',
-            xtype : 'gmail-ComposeEmailView'
+            xtype : 'gmail-ComposeNewEmailView'
         },
         {
             title : 'Logout',

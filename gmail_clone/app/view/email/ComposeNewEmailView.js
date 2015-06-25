@@ -1,13 +1,13 @@
-Ext.define('GMAIL.view.ComposeEmailView', {
+Ext.define('GMAIL.view.ComposeNewEmailView', {
     extend : 'Ext.panel.Panel',
-    xtype  : 'gmail-ComposeEmailView',
+    xtype  : 'gmail-ComposeNewEmailView',
 
     bind : {
         reference : 'GMAIL.model.Email'
     },
     
     viewModel: {
-        type: 'detailform'
+        type: 'emailform'
     },
 
 
@@ -21,7 +21,7 @@ Ext.define('GMAIL.view.ComposeEmailView', {
             xtype      : 'textfield', 
             fieldLabel : 'To ',
             allowBlank : false,
-            vtype : 'email',
+            vtype      : 'email',
             bind       : { value : '{rec.sender}' }
         },
         {
@@ -39,12 +39,14 @@ Ext.define('GMAIL.view.ComposeEmailView', {
         },
         {
             xtype : 'panel',
-            items : [{
-                xtype  :'button',
-                text   :'Send Email',
-                align  :'left',
-                itemId :'sendButton'
-            }]
+            items : [
+                {
+                    xtype  :'button',
+                    text   :'Send Email',
+                    align  :'left',
+                    itemId :'sendButton'
+                }
+            ]
         }
     ]
 });
