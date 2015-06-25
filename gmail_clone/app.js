@@ -3,12 +3,15 @@ Ext.application({
     
     views : [
         'Login',
-        'EmailView'
+        'EmailView',
+        'AllEmailViews',
+        'ComposeEmailView'
     ],
     
     controllers : [
         'Login',
-        'Master'
+        'Master',
+        'AllEmailsController'
     ],
 
     stores : [
@@ -18,14 +21,18 @@ Ext.application({
     launch : function() {
         Ext.create('Ext.container.Viewport', {
             fullscreen: true,
-            layout: {
-                type: 'fit'
-            },
+            layout: 'card',
+            itemId: 'ViewportID',
             items: [
                 {
-                    xtype: 'gmail-EmailView'
+                    xtype: 'gmail-Login'
+                },
+                {
+                    xtype: 'gmail-AllEmailViews'
                 }
             ]
         });
     }
 });
+
+

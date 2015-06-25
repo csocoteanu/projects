@@ -1,7 +1,7 @@
 Ext.define('GMAIL.view.EmailView', {
     extend : 'Ext.panel.Panel',
     xtype  : 'gmail-EmailView',
-    
+
     bind : {
         reference : 'GMAIL.model.Email'
     },
@@ -12,61 +12,52 @@ Ext.define('GMAIL.view.EmailView', {
 
 
     layout: {
-        type: 'vbox',
+        type  : 'vbox',
         align : 'stretch',
         pack  : 'start'
     },
     items: [
         {
-            xtype  : 'panel', 
+            xtype  : 'grid',
             flex   : 1,
             title  : 'Inbox',
-            itemId : 'emailPanel',
+            itemId : 'emailGrid',
 
-            items: [{
-                xtype  : 'grid',
-                store  : 'Emails',
-                itemId : 'emailGrid',
-
-                columns: [
-                    { 
-                        text      : 'Date',  
-                        dataIndex : 'date',
-                        width     : 120
-                    },
-                    { 
-                        text      : 'Sender', 
-                        dataIndex : 'sender', 
-                        flex      : 1 
-                    },
-                    { 
-                        text      : 'Subject', 
-                        dataIndex : 'subject', 
-                        flex      : 1 
-                    }]
+            columns: [
+                { 
+                    text      : 'Date',  
+                    dataIndex : 'date',
+                    width     : 120
+                },
+                { 
+                    text      : 'Sender', 
+                    dataIndex : 'sender', 
+                    flex      : 1 
+                },
+                { 
+                    text      : 'Subject', 
+                    dataIndex : 'subject', 
+                    flex      : 1 
                 }]
         },
         {
-            xtype : 'panel', 
-            flex  : 1,
+            xtype  : 'panel', 
             layout : 'fit',
-
-            bind : { title: 'From: {rec.sender}' },
-
-            items: [{
-                xtype  : 'panel',
-                flex   : 1,
-                layout : 'fit',
-
-                bind   : { title : 'Subject: {rec.subject}' },
-                items  : [{
-                    xtype    : 'textareafield',
-                    readOnly : true,
-                    grow     : true,
-
-                    bind  : { value : '{rec.body}' }
-                }]
-            }]
+            itemId : 'senderPanel',
+            bind   : { title: 'From: {rec.sender}' }
+        },
+        {
+            xtype  : 'panel',
+            layout : 'fit',
+            bind   : { title : 'Subject: {rec.subject}' }
+        },
+        {
+            xtype    : 'textareafield',
+            flex     : 1,
+            layout   : 'fit',
+            readOnly : true,
+            grow     : true,
+            bind     : { value : '{rec.body}' }
         }
     ]
 });
