@@ -1,0 +1,29 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskAssignmentService", "TaskAssignmentService\TaskAssignmentService.csproj", "{C038A2C4-638D-465A-836D-1D8F1ED0783F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskAssignmentTestApp", "TaskAssignmentTestApp\TaskAssignmentTestApp.csproj", "{D26F5E8F-3197-4C6A-8F21-1849D0FBBB1D}"
+	ProjectSection(ProjectDependencies) = postProject
+		{C038A2C4-638D-465A-836D-1D8F1ED0783F} = {C038A2C4-638D-465A-836D-1D8F1ED0783F}
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C038A2C4-638D-465A-836D-1D8F1ED0783F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C038A2C4-638D-465A-836D-1D8F1ED0783F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C038A2C4-638D-465A-836D-1D8F1ED0783F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C038A2C4-638D-465A-836D-1D8F1ED0783F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D26F5E8F-3197-4C6A-8F21-1849D0FBBB1D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D26F5E8F-3197-4C6A-8F21-1849D0FBBB1D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D26F5E8F-3197-4C6A-8F21-1849D0FBBB1D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D26F5E8F-3197-4C6A-8F21-1849D0FBBB1D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
