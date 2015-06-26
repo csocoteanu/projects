@@ -58,8 +58,9 @@ Ext.define('GMAIL.controller.MainViewController', {
         var inboxTab  = tabPanel.items.get(0);
         var inboxGrid = inboxTab.getComponent('emailGrid');
         
-
+        inboxGrid.getSelectionModel().deselectAll();
         inboxTab.getViewModel().setData({rec: null});
+        inboxTab.getViewModel().notify();
 
         var store = inboxGrid.getStore();
         store.resetEmails();
@@ -73,7 +74,7 @@ Ext.define('GMAIL.controller.MainViewController', {
             function(confirmation) {
                 if (confirmation == "yes") {
                     this.onClearEmailView(tabPanel);
-                    
+
                     var loginView = Ext.ComponentQuery.query('gmail-LoginView')[0];
                     this.changeView(loginView);
                 } else {
