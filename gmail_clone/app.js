@@ -9,9 +9,10 @@ Ext.application({
     ],
     
     controllers : [
-        'Login',
-        'Master',
-        'AllEmailsController'
+        'LoginController',
+        'MainViewController',
+        'EmailViewController',
+        'ComposeEmailController'
     ],
 
     stores : [

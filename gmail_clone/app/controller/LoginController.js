@@ -1,4 +1,4 @@
-Ext.define('GMAIL.controller.Login', {
+Ext.define('GMAIL.controller.LoginController', {
     extend : 'Ext.app.Controller',
     
     init : function() {        

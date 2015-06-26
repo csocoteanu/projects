@@ -1,29 +1,14 @@
-Ext.define('GMAIL.controller.Master', {
+Ext.define('GMAIL.controller.MainViewController', {
     extend : 'Ext.app.Controller',
     
     init: function() {
-         this.control(
-            {
-                '#emailGrid':
-                { 
-                    select : this.onGridSelect
-                },
-                '#allTabs': 
+         this.control({
+            '#allTabs': 
                  {
                     render          : this.onPanelRender,
                     beforetabchange : this.beforeTabChanged
-                },
-                '#sendButton':
-                {
-                    click : this.onSendEmailClick
                 }
          });
-     },
-
-    onGridSelect : function(grid, record, index, eOpts) {
-        var bodyform = grid.view.up('gmail-EmailView');
-        bodyform.getViewModel().setData({rec: record});
-        bodyform.getViewModel().notify();
     },
 
     onPanelRender : function(tabPanel, eOpts) {
@@ -57,19 +42,5 @@ Ext.define('GMAIL.controller.Master', {
                 }
             });
         }
-    },
-
-    onSendEmailClick : function(btn) {
-        var composeEmailView = btn.up('gmail-ComposeNewEmailView');
-        var emailModel = null;
-        var data = null; 
-
-        emailModel = composeEmailView.getViewModel();
-        datat = emailModel.getData();
-
-        console.log(data.rec);
-
-        emailModel.setData({rec: null});
-        emailModel.notify();
     }
 });
