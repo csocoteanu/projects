@@ -22,6 +22,7 @@ Ext.define('GMAIL.view.EmailView', {
             flex   : 1,
             title  : 'Inbox',
             itemId : 'emailGrid',
+            store  : null,
 
             columns: [
                 { 

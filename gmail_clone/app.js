@@ -24,7 +24,7 @@ Ext.application({
             fullscreen : true,
 
             layout     : 'card',
-            itemId     : 'ViewportID',
+            itemId     : 'appViewport',
 
             items:[
                 {

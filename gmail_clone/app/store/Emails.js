@@ -58,5 +58,9 @@ Ext.define('GMAIL.store.Emails', {
 
     getSentEmails : function() {
         return []
+    },
+
+    resetEmails : function() {
+        this.loadData([]);
     }
 });

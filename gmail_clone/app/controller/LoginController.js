@@ -34,8 +34,6 @@ function isLoginSuccesfull(email, password) {
 }
 
 function onLoginSuccesfull() {
-    var form = Ext.ComponentQuery.query('gmail-MainView')[0];
-    var mainPage = form.up();
-    mainPage.setActiveItem(form);
-    form.setActiveTab(0);
+    var mainView = Ext.ComponentQuery.query('gmail-MainView')[0];
+    mainView.fireEvent('initemailview', mainView);
 }
