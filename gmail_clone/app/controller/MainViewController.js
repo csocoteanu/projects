@@ -37,7 +37,8 @@ Ext.define('GMAIL.controller.MainViewController', {
     }, 
 
     onDestroy : function(tabPanel, eOpts) {
-        // TODO: 
+        // TODO: investigate how to properly call up this EXT.JS cleanup API
+        // TODO: cleanup existing data stores
         debugger;
     },
 
