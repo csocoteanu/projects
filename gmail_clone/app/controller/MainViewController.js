@@ -18,13 +18,8 @@ Ext.define('GMAIL.controller.MainViewController', {
         var inboxTab    = tabPanel.items.get(0);
         var sentMailTab = tabPanel.items.get(1);
 
-        // Set tab name for Inbox and store type
-        inboxTab.getComponent('emailGrid').setTitle('Inbox')
-        inboxTab.getComponent('emailGrid').reconfigure(Ext.create('GMAIL.store.Emails', { storeType : 'inbox' }));
-
-        // Set tab name for Sent Email and store type
-        sentMailTab.getComponent('emailGrid').setTitle('Sent Email')
-        sentMailTab.getComponent('emailGrid').reconfigure(Ext.create('GMAIL.store.Emails', { storeType: 'sent' }));
+        this.setGridTitleAndCreateStore(inboxTab, 'Inbox');
+        this.setGridTitleAndCreateStore(sentMailTab, 'Sent');
     },
 
     beforeTabChanged: function(tabPanel, newTab, oldTab, eOpts)  {
@@ -43,29 +38,17 @@ Ext.define('GMAIL.controller.MainViewController', {
     },
 
     onInitEmailView : function(tabPanel) {
+        // change tab to inbox tabPanel
         this.changeView(tabPanel);
-        // change tab to inbox tab
         tabPanel.setActiveTab(0);
 
-        var inboxTab  = tabPanel.items.get(0);
-        var inboxGrid = inboxTab.getComponent('emailGrid');
-        
-        var store = inboxGrid.getStore();
-        store.getEmails();
-        inboxGrid.reconfigure(store);
+        this.triggerEventOnGrid(/* Inbox View */ tabPanel.items.get(0), 'initview');
+        this.triggerEventOnGrid(/* Sent Mail View */ tabPanel.items.get(1), 'initview');
     },
 
     onClearEmailView : function(tabPanel) {
-        var inboxTab  = tabPanel.items.get(0);
-        var inboxGrid = inboxTab.getComponent('emailGrid');
-        
-        inboxGrid.getSelectionModel().deselectAll();
-        inboxTab.getViewModel().setData({rec: null});
-        inboxTab.getViewModel().notify();
-
-        var store = inboxGrid.getStore();
-        store.resetEmails();
-        inboxGrid.reconfigure(store);
+        this.triggerEventOnGrid(/* Inbox View */ tabPanel.items.get(0), 'clearview');
+        this.triggerEventOnGrid(/* Sent Mail View */ tabPanel.items.get(1), 'clearview');
     },
 
     showConfirmationBox : function(tabPanel, newTab, oldTab) {
@@ -89,5 +72,16 @@ Ext.define('GMAIL.controller.MainViewController', {
     changeView : function(newView) {
         var viewport = newView.up();
         viewport.setActiveItem(newView);
+    },
+
+    triggerEventOnGrid : function(tabView, eventName) {
+        var grid = tabView.getComponent('emailGrid');
+        grid.fireEvent(eventName, grid, tabView);
+    },
+
+    setGridTitleAndCreateStore : function(tabView, gridTitle) {
+        // Set tab name for #gridTitle and store type
+        tabView.getComponent('emailGrid').setTitle(gridTitle);
+        tabView.getComponent('emailGrid').reconfigure(Ext.create('GMAIL.store.Emails', { storeType : gridTitle.toLowerCase() }));
     }
 });

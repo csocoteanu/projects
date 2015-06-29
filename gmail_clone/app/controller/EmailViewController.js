@@ -6,8 +6,10 @@ Ext.define('GMAIL.controller.EmailViewController', {
             {
                 '#emailGrid':
                 { 
-                    select : this.onGridSelect
-                }
+                    select      : this.onGridSelect,
+                    'initview'  : this.onInitView,
+                    'clearview' : this.onClearView
+                },
          });
      },
 
@@ -15,5 +17,22 @@ Ext.define('GMAIL.controller.EmailViewController', {
         var bodyform = grid.view.up('gmail-EmailView');
         bodyform.getViewModel().setData({rec: record});
         bodyform.getViewModel().notify();
+    },
+
+    onInitView : function(emailGrid) {
+        var store = emailGrid.getStore();
+
+        store.getEmails();
+        emailGrid.reconfigure(store);
+    },
+
+    onClearView : function(emailGrid, inboxTab) {
+        emailGrid.getSelectionModel().deselectAll();
+        inboxTab.getViewModel().setData({rec: null});
+        inboxTab.getViewModel().notify();
+
+        var store = emailGrid.getStore();
+        store.resetEmails();
+        emailGrid.reconfigure(store);
     }
 });

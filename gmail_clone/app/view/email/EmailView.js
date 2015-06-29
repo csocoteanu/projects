@@ -10,12 +10,12 @@ Ext.define('GMAIL.view.EmailView', {
         type: 'emailform'
     },
 
-
     layout: {
         type  : 'vbox',
         align : 'stretch',
         pack  : 'start'
     },
+
     items: [
         {
             xtype  : 'grid',
