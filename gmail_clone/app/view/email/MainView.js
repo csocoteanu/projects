@@ -7,6 +7,8 @@ Ext.define('GMAIL.view.MainView', {
     autoScroll        : false,
     layoutOnTabChange : true,
 
+    tokenId           : null,
+
     items: [
         {
             title : 'Inbox',

@@ -37,7 +37,9 @@ Ext.define('GMAIL.controller.MainViewController', {
         debugger;
     },
 
-    onInitEmailView : function(tabPanel) {
+    onInitEmailView : function(tabPanel, tokenId) {
+        tabPanel.tokenId = tokenId;
+
         // change tab to inbox tabPanel
         this.changeView(tabPanel);
         tabPanel.setActiveTab(0);

@@ -24,36 +24,10 @@ Ext.define('GMAIL.store.Emails', {
     },
 
     getInboxEmails : function() {
-        return [
-            { 
-                'sender'  : 'lisa@simpsons1.com',
-                'date'    : '21-06-2015',
-                'subject' : 'Hello',
-                'body'    : 'Hello again!',
-                'read'    : false
-            },
-            { 
-                'sender'  : 'lisa@simpsons2.com',
-                'date'    : '22-06-2015',
-                'subject' : 'Hello again',
-                'body'    : 'Hello again from subject!',
-                'read'    : false
-            },
-            { 
-                'sender'  : 'lisa@simpsons3.com',
-                'date'    : '23-06-2015',
-                'subject' : 'Hola',
-                'body'    : 'Hola again from subject!',
-                'read'    : false
-            },
-            { 
-                'sender'  : 'lisa@simpsons4.com',
-                'date'    : '24-06-2015',
-                'subject' : 'Hi',
-                'body'    : 'Hi again from subject!',
-                'read'    : false
-            }
-        ]
+        var tokenId = this.getTokenId();
+        this.getAllEmails(tokenId, "inbox");
+
+        return [];
     },
 
     getSentEmails : function() {
@@ -62,5 +36,30 @@ Ext.define('GMAIL.store.Emails', {
 
     resetEmails : function() {
         this.loadData([]);
+    },
+
+    getTokenId : function() {
+        var mainView = Ext.ComponentQuery.query('gmail-MainView')[0];
+        return mainView.tokenId;
+    },
+
+    getAllEmails : function(tokenId, emailType) {
+        Ext.Ajax.request({
+            url      : 'http://localhost:9090/api/getEmails',
+            headers  : { 'Content-Type': 'application/json' },
+            method   : 'GET',          
+            params   : { 'tokenId': tokenId, 'emailType': emailType },
+            jsonData : { },
+            success  : this.onGetEmailsSuccesfull,
+            failure  : this.onGetEmailsFailed
+        });
+    },
+
+    onGetEmailsSuccesfull : function() {
+        alert("success");
+    },
+
+    onGetEmailsFailed : function() {
+        alert("failed");
     }
 });

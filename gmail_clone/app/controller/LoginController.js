@@ -20,20 +20,33 @@ Ext.define('GMAIL.controller.LoginController', {
             var email = emailField.getValue();
             var password = passwordField.getValue();
             
-            if (isLoginSuccesfull(email, password)) {
-               onLoginSuccesfull(); 
-            } else {
-                emailField.setActiveError("ERROR! Invalid username or password!");
-            }
+            checkLoginSuccesfull(email, password);
         }
     }
 });
 
-function isLoginSuccesfull(email, password) {
-    return true;
+function checkLoginSuccesfull(email, password) {
+    Ext.Ajax.request({
+        url: 'http://localhost:9090/api/login',
+        headers: { 'Content-Type': 'application/json' },
+        method: 'POST',          
+        params: { 'email'    : email, 'password' : password },
+        jsonData : { },
+        success: onLoginSuccesfull,                                    
+        failure: onLoginFailed
+    });
 }
 
-function onLoginSuccesfull() {
+function onLoginSuccesfull(conn, response, options, eOpt) {
     var mainView = Ext.ComponentQuery.query('gmail-MainView')[0];
-    mainView.fireEvent('initemailview', mainView);
+    var tokenId = Ext.decode(conn.responseText).tokenId;
+
+    mainView.fireEvent('initemailview', mainView, tokenId);
+}
+
+function onLoginFailed(conn, response, options, eOpt) {
+    var loginView = Ext.ComponentQuery.query('gmail-LoginView')[0];
+    var emailField = loginView.getForm().findField('email');
+
+    emailField.setActiveError("ERROR! Invalid username or password!");
 }

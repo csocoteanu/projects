@@ -1,0 +1,23 @@
+{
+  "name": "gmail_clone",
+  "version": "1.0.0",
+  "description": "This is a gmail email client",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "GMAIL",
+    "Email",
+    "client"
+  ],
+  "author": "Cezar Socoteanu",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.13.1",
+    "cors": "^2.7.1",
+    "express": "^4.13.0",
+    "extdirect": "^2.0.1",
+    "morgan": "^1.6.0"
+  }
+}
