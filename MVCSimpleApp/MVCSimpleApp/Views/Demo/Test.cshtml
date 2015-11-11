@@ -1,0 +1,32 @@
+﻿@model  List<MVCSimpleApp.Models.Book>
+
+@{
+    ViewBag.Title = "Test";
+}
+
+<h2>Test</h2>
+
+<fieldset>
+    <legend>Book</legend>
+
+    @{
+        for (var i = 0; i < ViewBag.Model.Count; i++)
+        {
+            var item = ViewBag.Model[i];
+            var bookName = item.BookName;
+            <div class="display-label">
+                @(item.BookName)
+            </div>
+            <div class="display-label">
+                @(item.AuthorName)
+            </div>
+            <div class="display-label">
+                @(item.ISBN)
+            </div>
+        }
+    }
+</fieldset>
+<p>
+    @*@Html.ActionLink("Edit", "Edit", new { id=Model.ID }) |*@
+    @Html.ActionLink("Back to List", "Index")
+</p>
