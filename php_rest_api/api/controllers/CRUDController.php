@@ -26,14 +26,17 @@
 
         public function readAction()
         {
+            return "GET";
         }
 
         public function updateAction()
         {
+            return "PUT";
         }
 
         public function deleteAction()
         {
+            return "DELETE";
         }
     }
 ?>
