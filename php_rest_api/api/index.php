@@ -9,28 +9,22 @@
 		echo '</pre>';	
 	}
 
-	include_once 'models/CRUDItem.php';
-	include_once 'controllers/CRUDController.php';
+	include_once 'controller/CRUDController.php';
 
+	$result = null;
 	$params = $_REQUEST;
 	$http_method = $_SERVER['REQUEST_METHOD'];
-	$crud_controller = new CRUDController($params);
+	$crud_controller = CRUDController::getInstance();
 
-	#print_debug_info($params);
-	#print_debug_info($_SERVER);
-
+	// print_debug_info($params);
+	// print_debug_info($_SERVER);
+	
 	switch ($http_method) {
 		case 'GET':
-			$result = $crud_controller->readAction();
+			$result = $crud_controller->readAction($params);
 			break;
 		case 'POST':
-			$result = $crud_controller->createAction();
-			break;
-		case 'PUT':
-			$result = $crud_controller->updateAction();
-			break;
-		case 'DELETE':
-			$result = $crud_controller->deleteAction();
+			$result = $crud_controller->parsePostMethod($params);
 			break;
 	}
 
