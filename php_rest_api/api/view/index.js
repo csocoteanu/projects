@@ -4,25 +4,21 @@ kEMP_NAME = 'employee_name';
 kMGR_NAME = 'manager_name';
 kJOB = 'job';
 
-function getFormData(httpAction)
+function getFormData()
 {
-	// TODO: replace hardcoded values with constants
-	return {
-		'http_action': httpAction,
-		'employee_name': $('#' + kEMP_NAME).val(),
-		'manager_name': $('#' + kMGR_NAME).val(),
-		'job': $('#' + kJOB).val()
-	};
+	return "" + 
+		kEMP_NAME + "='" + $('#' + kEMP_NAME).val() + "'&" +
+		kMGR_NAME + "='" + $('#' + kMGR_NAME).val() + "'&" +
+		kJOB + "='" + $('#' + kJOB).val() + "'";
 }
 
-function callWebApi(isGetMethod, httpAction)
+function callWebApi(httpMethod)
 {
-	var ajaxCall = (isGetMethod) ? 'GET' : 'POST';
-	var data = (isGetMethod) ? null : getFormData(httpAction);
-	
+	var data = (httpMethod === 'GET') ? null : getFormData();
+
 	$.ajax({
 		url: kWEB_URL,
-		type: ajaxCall,
+		type: httpMethod,
 		data: data,
 		success: function(result){
 			$("#resultDiv").html(result);
@@ -36,18 +32,18 @@ function callWebApi(isGetMethod, httpAction)
 $( document ).ready(function() {
 	// GET
 	$("#btnGet").click(function(){
-		callWebApi(true, null);
+		callWebApi("GET");
 	});
 	// POST
 	$("#btnPost").click(function(){
-		callWebApi(false, "POST");
+		callWebApi("POST");
 	});
 	// PUT
 	$("#btnPut").click(function(){
-		callWebApi(false, "PUT");
+		callWebApi("PUT");
 	});
 	// DELETE
 	$("#btnDelete").click(function(){
-		callWebApi(false, "DELETE");
+		callWebApi("DELETE");
 	});
 });
