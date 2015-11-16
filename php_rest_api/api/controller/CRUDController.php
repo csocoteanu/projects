@@ -62,7 +62,7 @@
             $this->_checkInputValue($job_name);
 
             $job = Job::getByCondition(Job::kNAME . "=" . $job_name);
-            $this->_checkInputValue($job);
+            $this->_checkInputValue($job, "Job with name" . $job_name . "does not exist.");
 
             // $manager = Employee::getByCondition(Employee::kMGR_NAME . "='" . $mgr_name . "'");
             $employee = new Employee('NULL', $emp_name, 'NULL', $job->id);
