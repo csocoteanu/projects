@@ -27,7 +27,7 @@
         }
         
         public function __toString() {
-            return "({$this->name}: {$this->getJob()->name})";
+            return "({$this->name}: {$this->getJob()->name} : {$this->getManager()})";
         }
 
         public function getManager()
@@ -65,13 +65,13 @@
         public function update()
         {
             $dbConnection = DBConnection::getInstance();
-            $dbConnection->insert(
+            $dbConnection->update(
                 Employee::kEMPLOYEE_TABLE,
                 Employee::kID . " = " . $this->id,
                 array(
-                    kNAME => "'".$this->name."'",
-                    kJOB_ID => $this->job_id,
-                    kMGR_ID => $this->manager_id
+                    Employee::kNAME => "'".$this->name."'",
+                    Employee::kJOB_ID => $this->job_id,
+                    Employee::kMGR_ID => $this->manager_id
                 )  
             );
         }
