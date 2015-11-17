@@ -50,7 +50,7 @@
                 break;
         }
     } catch (Exception $e) {
-        die("Fatal error: " . $e->getMessage());
+        die("Fatal error: " . $e->getMessage() . "<br>" .  $e->getTraceAsString());
     }
 
     echo $result;

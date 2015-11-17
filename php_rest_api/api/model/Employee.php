@@ -33,7 +33,7 @@
         public function getManager()
         {
             if ($this->_manager === null) {
-                $this->_manager = Employee::getByCondition(Employee::kID . " = '" . $this->manager_id . "'");
+                $this->_manager = Employee::getById($this->manager_id);
             }
             
             return $this->_manager;
@@ -42,7 +42,7 @@
         public function getJob()
         {
             if ($this->_job === null) {
-                $this->_job = Job::getByCondition(Job::kID . " = '" . $this->job_id . "'");
+                $this->_job = Job::getById($this->job_id);
             }
             
             return $this->_job;
@@ -55,7 +55,7 @@
                 Employee::kEMPLOYEE_TABLE,
                 array(
                     Employee::kID => $this->id,
-                    Employee::kNAME => $this->name,
+                    Employee::kNAME => "'".$this->name."'",
                     Employee::kJOB_ID => $this->job_id,
                     Employee::kMGR_ID => $this->manager_id
                 )
@@ -67,13 +67,19 @@
             $dbConnection = DBConnection::getInstance();
             $dbConnection->insert(
                 Employee::kEMPLOYEE_TABLE,
-                Employee::kID . " = '" . $this->id . "'",
+                Employee::kID . " = " . $this->id,
                 array(
-                    kNAME => $this->name,
+                    kNAME => "'".$this->name."'",
                     kJOB_ID => $this->job_id,
                     kMGR_ID => $this->manager_id
                 )  
             );
+        }
+
+        public function delete()
+        {
+            $dbConnection = DBConnection::getInstance();
+            $dbConnection->delete(Employee::kEMPLOYEE_TABLE, Employee::kID . " = " . $this->id);
         }
 
         public static function getAll()
@@ -83,21 +89,31 @@
             $rows = $dbConnection->select(Employee::kEMPLOYEE_TABLE);
 
             foreach ($rows as $key => $value) {
-                $employee = new Employee($value[Employee::kID], $value[Employee::kNAME], $value[kJOB_ID], $value[kMGR_ID]);
+                $employee = new Employee($value[Employee::kID], $value[Employee::kNAME], $value[Employee::kMGR_ID], $value[Employee::kJOB_ID]);
                 array_push($result, $employee);
             }
 
             return $result;
         }
         
-        public static function getByCondition($condition)
+        public static function getById($id)
+        {
+            return Employee::_getByCondition(Employee::kID . "='" . $id . "'");
+        }
+
+        public static function getByName($name)
+        {
+            return Employee::_getByCondition(Employee::kNAME . "='" . $name . "'");
+        }
+
+        private static function _getByCondition($condition)
         {
             $result = null;
             $dbConnection = DBConnection::getInstance();
             $rows = $dbConnection->select(Employee::kEMPLOYEE_TABLE, $condition);
 
             foreach ($rows as $key => $value) {
-                $result = new Employee($value[Employee::kID], $value[Employee::kNAME], $value[kJOB_ID], $value[kMGR_ID]);
+                $result = new Employee($value[Employee::kID], $value[Employee::kNAME], $value[Employee::kMGR_ID], $value[Employee::kJOB_ID]);
             }
 
             return $result;

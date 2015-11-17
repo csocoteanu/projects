@@ -91,8 +91,10 @@ class DBConnection
         return $this->_executeQuery($sql);
     }
     
-    public function delete()
+    public function delete($table_name, $condition)
     {
+        $sql = "DELETE FROM " . $table_name . " WHERE " . $condition;
+        return $this->_executeQuery($sql);
     }
 }
 

@@ -1,6 +1,5 @@
 <?php
-    include_once 'model/Job.php';
-    include_once 'model/Employee.php';
+    include_once 'model/ProxyLayer.php';
 
     class CRUDController
     {
@@ -12,11 +11,6 @@
     
         private function __construct() { }
         private function __clone() { }
-        
-        private function _isNullOrEmptyString($string)
-        {
-            return (!isset($string) || trim($string)==='');
-        }
 
         private function _serializeCollection($collection)
         {
@@ -26,17 +20,6 @@
             }
 
             return $result;
-        }
-
-        private function _checkInputValue($value, $customMessage=null)
-        {
-            if ($this->_isNullOrEmptyString($value)) {
-                $errMessage = (!$this->_isNullOrEmptyString($customMessage))
-                              ? $customMessage
-                              : "Empty value provided for input parameter.";
-
-                die($errMessage);
-            }
         }
 
         public static function getInstance()
@@ -50,7 +33,8 @@
 
         public function readAction()
         {
-            return $this->_serializeCollection(Job::getAll());
+            $proxy = ProxyLayer::getInstance();
+            return $this->_serializeCollection($proxy->getAllEmployees_JSON());
         }
 
         public function createAction($params)
@@ -58,35 +42,33 @@
             $emp_name = $params[CRUDController::kEMP_NAME];
             $mgr_name = $params[CRUDController::kMGR_NAME];
             $job_name = $params[CRUDController::kJOB];
-            $this->_checkInputValue($emp_name);
-            $this->_checkInputValue($job_name);
+            $proxy = ProxyLayer::getInstance();
+            
+            $proxy->createEmployee($emp_name, $job_name, $mgr_name);
 
-            $job = Job::getByCondition(Job::kNAME . "=" . $job_name);
-            $this->_checkInputValue($job, "Job with name" . $job_name . "does not exist.");
-
-            // $manager = Employee::getByCondition(Employee::kMGR_NAME . "='" . $mgr_name . "'");
-            $employee = new Employee('NULL', $emp_name, 'NULL', $job->id);
-            $employee->save();
-
-            return "POST OK";
+            return "POST OK.";
         }
         
         public function updateAction($params)
         {
             $emp_name = $params[CRUDController::kEMP_NAME];
             $mgr_name = $params[CRUDController::kMGR_NAME];
-            $job = $params[CRUDController::kJOB];
+            $job_name = $params[CRUDController::kJOB];
+            $proxy = ProxyLayer::getInstance();
 
-            return "PUT" . $emp_name . $mgr_name . $job;
+            $proxy->updateEmployee($emp_name, $job_name, $mgr_name);
+
+            return "PUT OK.";
         }
 
         public function deleteAction($params)
         {
             $emp_name = $params[CRUDController::kEMP_NAME];
+            $proxy = ProxyLayer::getInstance();
 
-            $this->_checkInputValue($emp_name);
+            $proxy->deleteEmployee($emp_name);
 
-            return "DELETE" . $emp_name;
+            return "DELETE OK.";
         }
     }
 ?>

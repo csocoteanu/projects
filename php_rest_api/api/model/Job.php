@@ -33,8 +33,18 @@
 
             return $result;
         }
+
+        public static function getById($id)
+        {
+            return Job::_getByCondition(Employee::kID . "='" . $id . "'");
+        }
+
+        public static function getByName($name)
+        {
+            return Job::_getByCondition(Employee::kNAME . "='" . $name . "'");
+        }
         
-        public static function getByCondition($condition)
+        private static function _getByCondition($condition)
         {
             $result = null;
             $dbConnection = DBConnection::getInstance();

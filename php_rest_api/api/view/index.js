@@ -7,9 +7,9 @@ kJOB = 'job';
 function getFormData()
 {
 	return "" + 
-		kEMP_NAME + "='" + $('#' + kEMP_NAME).val() + "'&" +
-		kMGR_NAME + "='" + $('#' + kMGR_NAME).val() + "'&" +
-		kJOB + "='" + $('#' + kJOB).val() + "'";
+		kEMP_NAME + "=" + $('#' + kEMP_NAME).val() + "&" +
+		kMGR_NAME + "=" + $('#' + kMGR_NAME).val() + "&" +
+		kJOB + "=" + $('#' + kJOB).val();
 }
 
 function callWebApi(httpMethod)
