@@ -58,7 +58,7 @@
 
         public function getAllEmployees_JSON()
         {
-            return Employee::getAll();
+            return json_encode(Employee::getAll());
         }
 
         public function createEmployee($name, $job_name, $manager_name)

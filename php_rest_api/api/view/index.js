@@ -12,7 +12,37 @@ function getFormData()
 		kJOB + "=" + $('#' + kJOB).val();
 }
 
-function callWebApi(httpMethod)
+function emitTextField(value)
+{
+	return "<input type='text' value='" + value + "'>";
+}
+
+function emitButton(value, buttonClickCB)
+{
+	return "<input type='submit' value='" + value + "' id='" + value + "'>";
+}
+
+function emitRow(employee)
+{
+	return "<tr id='" + employee.id + "'>" +
+				"<td>" + emitTextField(employee.name) + "</td>" +
+				"<td>" + emitTextField(employee.jobs_id) + "</td>" +
+				"<td>" + emitTextField(employee.employees_id) + "</td>" +
+				"<td>" + emitButton("Clone", null) + "</td>" +
+				"<td>" + emitButton("Save", null) + "</td>" +
+			"</tr>"
+}
+
+function populateDataTable(result)
+{
+	employees = JSON.parse(result);
+	for (i = 0; i < employees.length; i++) {
+		row = emitRow(employees[i]);
+		$('#data_table').append(row);
+	}
+}
+
+function callWebApi(httpMethod, onSuccessCB)
 {
 	var data = (httpMethod === 'GET') ? null : getFormData();
 
@@ -21,7 +51,8 @@ function callWebApi(httpMethod)
 		type: httpMethod,
 		data: data,
 		success: function(result){
-			$("#resultDiv").html(result);
+			if (onSuccessCB)
+				onSuccessCB(result);
 		},
 		error: function(xhr, status, error) {
 			$("#resultDiv").html(xhr.responseText);
@@ -30,20 +61,5 @@ function callWebApi(httpMethod)
 }
 
 $( document ).ready(function() {
-	// GET
-	$("#btnGet").click(function(){
-		callWebApi("GET");
-	});
-	// POST
-	$("#btnPost").click(function(){
-		callWebApi("POST");
-	});
-	// PUT
-	$("#btnPut").click(function(){
-		callWebApi("PUT");
-	});
-	// DELETE
-	$("#btnDelete").click(function(){
-		callWebApi("DELETE");
-	});
+	callWebApi('GET', populateDataTable);
 });
