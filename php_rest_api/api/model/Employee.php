@@ -35,7 +35,7 @@
 				Employee::kID => $this->id,
 				Employee::kNAME => $this->name,
 				Employee::kJOB_ID => $this->getJob()->name,
-				Employee::kMGR_ID => $this->manager_id
+				Employee::kMGR_ID => $this->getManager()->name
 			);
 		}
 		

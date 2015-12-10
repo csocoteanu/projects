@@ -40,6 +40,37 @@ function emitRow(employee, rowIndex)
 			"</tr>"
 }
 
+
+function emitTextField(value)
+{
+	return "<input type='text' value='" + value + "'>";
+}
+
+function emitButton(value, buttonClickCB)
+{
+	return "<input type='submit' value='" + value + "' id='" + value + "'>";
+}
+
+function emitRow(employee)
+{
+	return "<tr id='" + employee.id + "'>" +
+				"<td>" + emitTextField(employee.name) + "</td>" +
+				"<td>" + emitTextField(employee.jobs_id) + "</td>" +
+				"<td>" + emitTextField(employee.employees_id) + "</td>" +
+				"<td>" + emitButton("Clone", null) + "</td>" +
+				"<td>" + emitButton("Save", null) + "</td>" +
+			"</tr>"
+}
+
+function populateDataTable(result)
+{
+	employees = JSON.parse(result);
+	for (i = 0; i < employees.length; i++) {
+		row = emitRow(employees[i]);
+		$('#data_table').append(row);
+	}
+}
+
 function getRow(row_index)
 {
 	var rows = $('tr', '#data_table');
