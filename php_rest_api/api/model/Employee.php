@@ -30,6 +30,15 @@
             return "({$this->name}: {$this->getJob()->name} : {$this->getManager()})";
         }
 
+		public function toArray() {
+			return array(
+				Employee::kID => $this->id,
+				Employee::kNAME => $this->name,
+				Employee::kJOB_ID => $this->getJob()->name,
+				Employee::kMGR_ID => $this->manager_id
+			);
+		}
+		
         public function getManager()
         {
             if ($this->_manager === null) {
@@ -90,7 +99,7 @@
 
             foreach ($rows as $key => $value) {
                 $employee = new Employee($value[Employee::kID], $value[Employee::kNAME], $value[Employee::kMGR_ID], $value[Employee::kJOB_ID]);
-                array_push($result, $employee);
+                array_push($result, $employee->toArray());
             }
 
             return $result;

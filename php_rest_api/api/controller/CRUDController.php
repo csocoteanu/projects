@@ -12,16 +12,6 @@
         private function __construct() { }
         private function __clone() { }
 
-        private function _serializeCollection($collection)
-        {
-            $result = "";
-            foreach ($collection as $value) {
-                $result = $result . $value . "<br>";
-            }
-
-            return $result;
-        }
-
         public static function getInstance()
         {
             if (null === static::$instance) {
@@ -34,7 +24,7 @@
         public function readAction()
         {
             $proxy = ProxyLayer::getInstance();
-            return $this->_serializeCollection($proxy->getAllEmployees_JSON());
+            return $proxy->getAllEmployees_JSON();
         }
 
         public function createAction($params)
