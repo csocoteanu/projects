@@ -1,0 +1,40 @@
+{
+    "diagnostics_collector": {
+        "enabled": true,
+        "other_config": {
+            "archive": {
+                "destination_dir": ".",
+                "name": "log_collector",
+                "type": "zip"
+            },
+            "remote_copy": {
+                "enabled": true,
+                "user": "root",
+                "password": "12wq!@WQ",
+                "hostname": "10.10.15.238",
+                "path": "~/"
+            }
+        },
+        "modules": {
+            "log_collector": {
+                "enabled": true,
+                "modules": { },
+                "other_config": {
+                    "log_paths": [
+                        "/var/log/hydra/Processors.SecurityIssues.log",
+                        "/var/log/hydra/Processors.Router.log",
+                        "/var/log/hydra/log.txt"
+                    ]
+                }
+            },
+            "mongo_dump": {
+                "enabled": true,
+                "modules": { },
+                "other_config": {
+                    "user": "",
+                    "password": ""
+                }
+            }
+        }
+    }
+}
