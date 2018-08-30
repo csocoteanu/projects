@@ -1,0 +1,18 @@
+{
+  "logging" : {
+      "level"        : "debug",
+      "maxSize"      : 100000000,
+      "maxFiles"     : 1,
+      "logFile"      : "log.txt",
+      "logToStdout" : true
+  },
+
+  "client": {
+        "url" : "https://www.google.ro",
+        "debug" : true
+  },
+  "writer": {
+        "destination": "./google",
+        "delimiter"  : "/"
+  }
+}

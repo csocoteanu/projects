@@ -1,0 +1,22 @@
+{
+  "logging" : {
+      "level"        : "debug",
+      "maxSize"      : 100000000,
+      "maxFiles"     : 1,
+      "logFile"      : "log.txt",
+      "logToStdout" : true
+  },
+
+  "server": {
+        "port" : 9440,
+        "backlogSize": 1000,
+        "isHttps": true,
+
+        "certificates": {
+          "crt": "./server/plugins/auth/certificates/portal.crt",
+          "key": "./server/plugins/auth/certificates/portal.key"
+        },
+
+        "pluginNames": ["auth/auth", "inventory/inventory", "webHooks/webHooks"]
+  }
+}
