@@ -1,8 +1,5 @@
 var utilsModule          = require('../../../../utils/utils.js');
 
-/**
- * Created by msofron on 4/18/2018.
- */
 var vmUpdated = {
 
     "entity_reference":{

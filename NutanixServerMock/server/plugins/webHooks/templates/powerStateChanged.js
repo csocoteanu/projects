@@ -1,6 +1,3 @@
-/**
- * Created by iteodorescu on 4/17/2018.
- */
 var powerStateChanged = {
 
     "entity_reference":{
