@@ -1,36 +1,42 @@
 var async = require("async");
 
-var data = {
-  hello: null,
-  world: null
-};
+function init(callback) {
 
-function helloFunction(callback) {
+    return callback(null, { hello: null, world: null})
+}
 
-    console.log('====>', data);
+function helloFunction(data, callback) {
 
     setTimeout(function() {
 
+        console.log('hello got:',  data);
         data.hello = true;
 
-        console.log('hello');
         return callback(null, data);
     }, 500);
 }
 
 function worldFunction(data, callback) {
 
-    console.log("world: ", data);
+    console.log("world got: ", data);
+    data.world = true;
+
     return callback(null, data);
 }
 
-async.waterfall([helloFunction, worldFunction], function (err, results) {
+async.waterfall([
+    init,
+    helloFunction,
+    worldFunction],
 
-    // results is an array of the value returned from each function
-    // Handling errors here
-    if (err)    {
-        console.error('ERROR: ', err);
-    }
+    function (err, results) {
 
-    console.log(JSON.stringify(results));
-});
+        // results is an array of the value returned from each function
+        // Handling errors here
+        if (err)    {
+            console.error('ERROR===>', err, results);
+            return;
+        }
+
+        console.log(JSON.stringify(results));
+    });
