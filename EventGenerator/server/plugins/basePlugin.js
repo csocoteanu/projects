@@ -1,4 +1,4 @@
-function nutanixPlugin() {
+function basePlugin() {
 
     this.init = function(serverInstance) { };
 
@@ -9,4 +9,4 @@ function nutanixPlugin() {
     }
 }
 
-exports.nutanixPlugin = nutanixPlugin;
+exports.basePlugin = basePlugin;

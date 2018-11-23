@@ -35,7 +35,7 @@ function server(config) {
         _me._createServer();
         _me._loadPlugins();
 
-        _me.logInfo('Nutanix Server is listening for requests on port', _me._port);
+        _me.logInfo('Server is listening for requests on port', _me._port);
     };
 
     /**

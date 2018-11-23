@@ -1,4 +1,4 @@
-var nutanixPluginModule  = require('../nutanixPlugin.js');
+var basePluginModule     = require('../basePlugin.js');
 var constantsModule      = require('../../../utils/constants.js').constants;
 var webHookTemplate      = require('./templates/webHook.js');
 var requestModule        = require('request');
@@ -268,7 +268,7 @@ function webHooks() {
     };
 }
 
-webHooks.prototype = new nutanixPluginModule.nutanixPlugin();
+webHooks.prototype = new basePluginModule.basePlugin();
 
 exports.create = function() {
     return new webHooks();

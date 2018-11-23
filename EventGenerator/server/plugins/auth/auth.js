@@ -1,4 +1,4 @@
-var nutanixPluginModule  = require('../nutanixPlugin.js');
+var basePluginModule     = require('../basePlugin.js');
 var userInfoTemplate     = require('./templates/userInfo.js').userInfo;
 var constantsModule      = require('../../../utils/constants.js').constants;
 
@@ -20,7 +20,7 @@ function auth() {
     }
 }
 
-auth.prototype = new nutanixPluginModule.nutanixPlugin();
+auth.prototype = new basePluginModule.basePlugin();
 
 exports.create = function() {
     return new auth();
