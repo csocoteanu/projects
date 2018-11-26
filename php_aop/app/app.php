@@ -11,7 +11,7 @@ ApplicationAspectKernel::getInstance()->init([
 ]);
 
 $sampleClass = new SampleClass();
-$value = $sampleClass->computeFibonacci(30);
+$value = $sampleClass->computeFibonacci(24);
 
 echo '===================>' . $value;
 
