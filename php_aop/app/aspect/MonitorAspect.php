@@ -17,8 +17,8 @@ class MonitorAspect implements Aspect
      * @param MethodInvocation $invocation Invocation
      * @Before("execution(public SampleClass->*(*))")
      */
-    public function beforeMethodExecution(MethodInvocation $invocation)
-    {
-        echo "Before method\n";
+    public function beforeMethodExecution(MethodInvocation $invocation) {
+
+        echo "calling: " . $invocation->getMethod()->name . " with args: " .  $invocation->getArguments()[0] . PHP_EOL;
     }
 }
