@@ -1,11 +1,12 @@
 <?php
 
-class SampleClass {
+namespace examples\fibonacci;
 
-    public function testCondition($test = "test") {
-        echo "Test condition working fine\n";
-    }
+class Fibonacci {
 
+    /*
+     * suboptimal algorithm for computing a fibonacci number
+     */
     public function computeFibonacci($number) {
 
         if ($number == 0 || $number == 1) {
